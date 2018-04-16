@@ -33,7 +33,7 @@ function resolve (sbot, components, cb) {
           return cb(new Error('404'))
         } else {
           // recurse
-          resolve([json.links[link]].concat(components), cb)
+          resolve(sbot, [json.links[link]].concat(components), cb)
         }
       } catch (e) {
         // if this happens, it's a file blob
