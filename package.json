@@ -10,13 +10,13 @@
   "bugs": "https://github.com/noffle/ssb-web-resolver/issues",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/*.js",
     "lint": "standard"
   },
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "pull-stream": "^3.6.2"
+  },
   "devDependencies": {
-    "tape": "~4.6.2",
     "standard": "~10.0.0"
   },
   "license": "ISC"

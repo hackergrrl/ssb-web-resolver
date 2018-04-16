@@ -1,3 +1,5 @@
+var pull = require('pull-stream')
+
 module.exports = function (sbot, components, cb) {
   var self = this
 
@@ -9,6 +11,7 @@ module.exports = function (sbot, components, cb) {
 
   // get root blob
   sbot.blobs.size(id, function (err, size) {
+    if (err) return cb(err)
     if (size == null) return cb(null, self.askWantBlobsForm([id]))
     pull(sbot.blobs.get(id), pull.collect(function (err, chunks) {
       if (err) return cb(err)
