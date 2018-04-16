@@ -1,6 +1,8 @@
 var pull = require('pull-stream')
 
-module.exports = function (sbot, components, cb) {
+module.exports = resolve
+
+function resolve (sbot, components, cb) {
   var self = this
 
   if (!components || !components[0] || !components[0].startsWith('&')) {
@@ -24,13 +26,14 @@ module.exports = function (sbot, components, cb) {
 
         // if components[1] is empty, return the directory as text
         if (!link) {
+          // TODO: redirect to index.htm[l]
           return cb(null, text)
         } else if (!json.links[link]) {
           // no such link exists
           return cb(new Error('404'))
         } else {
           // recurse
-          self.resolveWebPath([json.links[link]].concat(components), cb)
+          resolve([json.links[link]].concat(components), cb)
         }
       } catch (e) {
         // if this happens, it's a file blob
