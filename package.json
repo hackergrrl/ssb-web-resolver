@@ -2,7 +2,7 @@
   "name": "ssb-web-resolver",
   "description": "resolve an ssb-web url",
   "author": "Stephen Whitmore <sww@eight.net>",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "repository": {
     "url": "git://github.com/noffle/ssb-web-resolver.git"
   },
