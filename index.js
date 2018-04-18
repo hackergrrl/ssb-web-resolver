@@ -49,6 +49,9 @@ function resolve (sbot, components, cb) {
         live: false,
         reverse: true
       }),
+      pull.filter(function (msg) {
+        return msg.value.content.type === 'web-root' && msg.value.content.root
+      }),
       pull.drain(function (msg) {
         if (!foundRoot) cb(null, msg.value.content.root)
         foundRoot = true
