@@ -3,8 +3,6 @@ var pull = require('pull-stream')
 module.exports = resolve
 
 function resolve (sbot, components, cb) {
-  var self = this
-
   var id = (components || []).shift()
   if (id.startsWith('&')) {
     // resolve blob
@@ -27,8 +25,7 @@ function resolve (sbot, components, cb) {
           if (err) return cb(err)
           get()
         })
-      }
-      else get()
+      } else get()
 
       function get () {
         pull(sbot.blobs.get(id), pull.collect(function (err, chunks) {
@@ -44,7 +41,7 @@ function resolve (sbot, components, cb) {
     var foundRoot = false
     pull(
       sbot.backlinks.read({
-        query: [{$filter: { dest: id } }],
+        query: [ { $filter: { dest: id } } ],
         index: 'DTA',
         live: false,
         reverse: true
