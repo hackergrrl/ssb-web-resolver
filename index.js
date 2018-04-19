@@ -30,8 +30,8 @@ function resolve (sbot, components, cb) {
       function get () {
         pull(sbot.blobs.get(id), pull.collect(function (err, chunks) {
           if (err) return cb(err)
-          var text = Buffer.concat(chunks).toString()
-          resolveRec(text)
+          var content = Buffer.concat(chunks)
+          resolveRec(content)
         }))
       }
     })
@@ -58,16 +58,16 @@ function resolve (sbot, components, cb) {
     )
   }
 
-  function resolveRec (text) {
+  function resolveRec (content) {
     try {
       // if this succeeds, it's a directory
-      var json = JSON.parse(text)
+      var json = JSON.parse(content)
       if (!json.links) throw new Error('show me as a raw file')
       var link = components.shift()
 
       if (!link) {
         // if components[1] is empty, return the directory as text
-        return cb(null, text)
+        return cb(null, content)
       } else if (!json.links[link]) {
         // no such link exists
         return cb(new Error('404'))
@@ -81,7 +81,7 @@ function resolve (sbot, components, cb) {
       if (components[0]) {
         return cb(new Error('404'))
       } else {
-        cb(null, text)
+        cb(null, content)
       }
     }
   }
