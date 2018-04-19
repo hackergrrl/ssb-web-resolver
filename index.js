@@ -65,11 +65,6 @@ function resolve (sbot, components, cb) {
       if (!json.links) throw new Error('show me as a raw file')
       var link = components.shift()
 
-      // redirect to index.htm[l] if possible
-      if (!link) {
-        link = 'index.html'
-      }
-
       if (!link) {
         // if components[1] is empty, return the directory as text
         return cb(null, text)
